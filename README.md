@@ -12,7 +12,7 @@ API made with the help of the [Traversy Media Video: Vanilla Node.js REST API | 
 
 ## TODO
 
-- [] Refactor routes folder
-- [] Use clean architecture
-- [] Add tests
-- [] Add database
+- [ ] Refactor routes folder
+- [ ] Use clean architecture
+- [ ] Add tests
+- [ ] Add database
