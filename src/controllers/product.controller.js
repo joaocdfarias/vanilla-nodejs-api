@@ -4,23 +4,20 @@ import { Product } from '../models/product.model.js'
 export class ProductController {
   productModel = new Product()
 
-  constructor(request, response) {
-    this.request = request
-    this.response = response
-  }
+  constructor() {}
 
-  async getProducts() {
+  async getProducts(request, response) {
     try {
       const products = await this.productModel.findAll()
 
       if (!products) {
-        this.response.writeHead(404, { 'Content-Type': 'application/json' })
-        this.response.end(JSON.stringify({ message: 'Not found any product' }))
+        response.writeHead(404, { 'Content-Type': 'application/json' })
+        response.end(JSON.stringify({ message: 'Not found any product' }))
         return
       }
 
-      this.response.writeHead(200, { 'Content-Type': 'application/json' })
-      this.response.end(JSON.stringify(products))
+      response.writeHead(200, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(products))
     } catch (error) {
       console.log(error)
     }
