@@ -79,10 +79,10 @@ export class ProductController {
       }
 
       const body = await getRequestBody(this.request)
-      const { title, description, price } = JSON.parse(body)
+      const { name, description, price } = JSON.parse(body)
 
       const editedProduct = {
-        name: title || product.title,
+        name: name || product.name,
         description: description || product.description,
         price: price || product.price,
       }
