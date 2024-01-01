@@ -1,4 +1,6 @@
-export const getRequestBody = (request) => {
+import { Request } from "../types"
+
+export const getRequestBody = (request: Request) => {
   return new Promise((resolve, reject) => {
     try {
       let body = ''

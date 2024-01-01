@@ -1,15 +1,26 @@
 import { createServer } from 'node:http'
 
+type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
+
+type Routes = {
+  method: Method
+  url: string
+  handler: any
+  params?: any
+}[]
+
 export class Router {
+  private routes: Routes
+
   constructor() {
     this.routes = []
   }
 
-  addRoute(method, url, handler) {
+  addRoute(method: Method, url: string, handler: any) {
     this.routes.push({ method, url, handler })
   }
 
-  findRoute(method, url) {
+  findRoute(method: Method, url: string) {
     const { pathname } = new URL(url, 'http://localhost')
 
     return this.routes.find((route) => {
@@ -21,7 +32,7 @@ export class Router {
           return false
         }
 
-        return routePathSegments.every((segment, index) => {
+        return routePathSegments.every((segment: string, index: number) => {
           if (segment.startsWith(':')) {
             route.params = route.params || {}
             const paramName = segment.slice(1)
@@ -36,30 +47,30 @@ export class Router {
     })
   }
 
-  get(route, handler) {
-    this.addRoute('get', route, handler)
+  get(route: string, handler: any) {
+    this.addRoute('GET', route, handler)
   }
 
-  post(route, handler) {
-    this.addRoute('post', route, handler)
+  post(route: string, handler: any) {
+    this.addRoute('POST', route, handler)
   }
 
-  put(route, handler) {
-    this.addRoute('put', route, handler)
+  put(route: string, handler: any) {
+    this.addRoute('PUT', route, handler)
   }
 
-  delete(route, handler) {
-    this.addRoute('delete', route, handler)
+  delete(route: string, handler: any) {
+    this.addRoute('DELETE', route, handler)
   }
 
-  listen(port, callback) {
+  listen(port: string | number | undefined, callback: any) {
     createServer((request, response) => {
-      const method = request.method.toLowerCase()
-      const url = request.url.toLowerCase()
-      const found = this.findRoute(method, url)
+      const method = request.method?.toLowerCase()
+      const url = request.url?.toLowerCase()
+      const found = this.findRoute(method as Method, url as string)
 
       if (found) {
-        response.send = (content) => {
+        ;(response as any).send = (content: any) => {
           response.writeHead(200, { 'Content-Type': 'application/json' })
           response.end(content)
         }
