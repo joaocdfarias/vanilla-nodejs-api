@@ -14,7 +14,7 @@ API made with the help of the [Traversy Media Video: Vanilla Node.js REST API | 
 
 - [x] Refactor routes folder
 - [x] Add TypeScript
-- [ ] Convert all files to TypeScript
+- [x] Convert all files to TypeScript
 - [ ] Use clean architecture
 - [ ] Add tests
 - [ ] Add database
