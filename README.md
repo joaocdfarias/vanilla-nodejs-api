@@ -22,4 +22,5 @@ API made with the help of the [Traversy Media Video: Vanilla Node.js REST API | 
 ## Libraries used
 
 - [TypeScript](https://www.typescriptlang.org/)
-- [ts-node-dev](https://www.npmjs.com/package/ts-node-dev)
+- [nodemon](https://www.npmjs.com/package/nodemon)
+- [ts-node](https://www.npmjs.com/package/ts-node)
