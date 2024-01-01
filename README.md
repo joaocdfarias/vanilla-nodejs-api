@@ -13,6 +13,11 @@ API made with the help of the [Traversy Media Video: Vanilla Node.js REST API | 
 ## TODO
 
 - [x] Refactor routes folder
+- [ ] Add TypeScript
 - [ ] Use clean architecture
 - [ ] Add tests
 - [ ] Add database
+
+## Libraries used
+
+- [TypeScript](https://www.typescriptlang.org/)
