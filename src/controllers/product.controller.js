@@ -23,29 +23,29 @@ export class ProductController {
     }
   }
 
-  async getProduct() {
+  async getProduct(request, response) {
     try {
-      const id = this.request.url.split('/api/products/')[1]
+      const id = request.url.split('/api/products/')[1]
       const product = await this.productModel.findById(id)
 
       if (!product) {
-        this.response.writeHead(404, { 'Content-Type': 'application/json' })
-        this.response.end(
+        response.writeHead(404, { 'Content-Type': 'application/json' })
+        response.end(
           JSON.stringify({ message: `Product with id ${id} not found` })
         )
         return
       }
 
-      this.response.writeHead(200, { 'Content-Type': 'application/json' })
-      this.response.end(JSON.stringify(product))
+      response.writeHead(200, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(product))
     } catch (error) {
       console.log(error)
     }
   }
 
-  async createProduct() {
+  async createProduct(request, response) {
     try {
-      const body = await getRequestBody(this.request)
+      const body = await getRequestBody(request)
       const { name, description, price } = JSON.parse(body)
 
       const product = {
@@ -55,27 +55,27 @@ export class ProductController {
       }
 
       const newProduct = await this.productModel.create(product)
-      this.response.writeHead(201, { 'Content-Type': 'application/json' })
-      this.response.end(JSON.stringify(newProduct))
+      response.writeHead(201, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(newProduct))
     } catch (error) {
       console.log(error)
     }
   }
 
-  async updateProduct() {
+  async updateProduct(request, response) {
     try {
-      const id = this.request.url.split('/api/products/')[1]
+      const id = request.url.split('/api/products/')[1]
       const product = await this.productModel.findById(id)
 
       if (!product) {
-        this.response.writeHead(404, { 'Content-Type': 'application/json' })
-        this.response.end(
+        response.writeHead(404, { 'Content-Type': 'application/json' })
+        response.end(
           JSON.stringify({ message: `Product with id ${id} not found` })
         )
         return
       }
 
-      const body = await getRequestBody(this.request)
+      const body = await getRequestBody(request)
       const { name, description, price } = JSON.parse(body)
 
       const editedProduct = {
@@ -85,29 +85,29 @@ export class ProductController {
       }
 
       const updatedProduct = await this.productModel.update(id, editedProduct)
-      this.response.writeHead(201, { 'Content-Type': 'application/json' })
-      this.response.end(JSON.stringify(updatedProduct))
+      response.writeHead(201, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(updatedProduct))
     } catch (error) {
       console.log(error)
     }
   }
 
-  async deleteProduct() {
+  async deleteProduct(request, response) {
     try {
-      const id = this.request.url.split('/api/products/')[1]
+      const id = request.url.split('/api/products/')[1]
       const product = await this.productModel.findById(id)
 
       if (!product) {
-        this.response.writeHead(404, { 'Content-Type': 'application/json' })
-        this.response.end(
+        response.writeHead(404, { 'Content-Type': 'application/json' })
+        response.end(
           JSON.stringify({ message: `Product with id ${id} not found` })
         )
         return
       }
 
       const deletedProduct = await this.productModel.delete(id)
-      this.response.writeHead(201, { 'Content-Type': 'application/json' })
-      this.response.end(JSON.stringify(deletedProduct))
+      response.writeHead(201, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(deletedProduct))
     } catch (error) {
       console.log(error)
     }

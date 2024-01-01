@@ -10,9 +10,30 @@ export class Router {
   }
 
   findRoute(method, url) {
-    return this.routes.find(
-      (route) => route.method === method && route.url === url
-    )
+    const { pathname } = new URL(url, 'http://localhost')
+
+    return this.routes.find((route) => {
+      if (route.method.toLowerCase() === method.toLowerCase()) {
+        const routePathSegments = route.url.split('/')
+        const requestPathSegments = pathname.split('/')
+
+        if (routePathSegments.length !== requestPathSegments.length) {
+          return false
+        }
+
+        return routePathSegments.every((segment, index) => {
+          if (segment.startsWith(':')) {
+            route.params = route.params || {}
+            const paramName = segment.slice(1)
+            route.params[paramName] = requestPathSegments[index]
+            return true
+          }
+          return segment === requestPathSegments[index]
+        })
+      }
+
+      return false
+    })
   }
 
   get(route, handler) {
@@ -21,6 +42,14 @@ export class Router {
 
   post(route, handler) {
     this.addRoute('post', route, handler)
+  }
+
+  put(route, handler) {
+    this.addRoute('put', route, handler)
+  }
+
+  delete(route, handler) {
+    this.addRoute('delete', route, handler)
   }
 
   listen(port, callback) {
