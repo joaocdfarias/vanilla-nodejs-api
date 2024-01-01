@@ -13,7 +13,8 @@ API made with the help of the [Traversy Media Video: Vanilla Node.js REST API | 
 ## TODO
 
 - [x] Refactor routes folder
-- [ ] Add TypeScript
+- [x] Add TypeScript
+- [ ] Convert all files to TypeScript
 - [ ] Use clean architecture
 - [ ] Add tests
 - [ ] Add database
@@ -21,3 +22,4 @@ API made with the help of the [Traversy Media Video: Vanilla Node.js REST API | 
 ## Libraries used
 
 - [TypeScript](https://www.typescriptlang.org/)
+- [ts-node-dev](https://www.npmjs.com/package/ts-node-dev)
